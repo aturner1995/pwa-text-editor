@@ -19,10 +19,6 @@ module.exports = () => {
         template: './index.html',
         title: 'Text Editor'
       }),
-      new InjectManifest({
-        swSrc: './src-sw.js',
-        swDest: 'service-worker.js'
-      }),
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
