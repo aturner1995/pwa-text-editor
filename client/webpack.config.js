@@ -24,24 +24,26 @@ module.exports = () => {
         swDest: 'src-sw.js'
       }),
       new WebpackPwaManifest({
+        fingerprints: false,
+        inject: true,
         name: 'Text Editor App',
         short_name: 'text-edit',
         description: 'My awesome tetx-editor PWA App!',
         background_color: '#ffffff',
-        crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
+        theme_color: '#225ca3',
+        start_url: './',
+        publicPath: './',
         icons: [
           {
-            src: path.resolve('./src/images/logo.png'),
-            sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
-          },
-          {
-            src: path.resolve('./src/images/logo.png'),
-            size: '1024x1024' // you can also use the specifications pattern
+            src: path.resolve('src/images/logo.png'),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join('assets', 'icons'),
           },
         ]
       })
     ],
     module: {
+      // CSS loaders
       rules: [
         {
           test: /\.css$/i,
@@ -50,6 +52,7 @@ module.exports = () => {
         {
           test: /\.m?js$/,
           exclude: /node_modules/,
+          // We use babel-loader in order to use ES6.
           use: {
             loader: 'babel-loader',
             options: {
