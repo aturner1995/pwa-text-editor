@@ -8,7 +8,10 @@ module.exports = () => {
     mode: 'development',
     entry: {
       main: './src/js/index.js',
-      install: './src/js/install.js'
+      install: './src/js/install.js',
+      database: './src/js/database.js',
+      editor: './src/js/editor.js',
+      header: './src/js/header.js',
     },
     output: {
       filename: '[name].bundle.js',
@@ -19,12 +22,16 @@ module.exports = () => {
         template: './index.html',
         title: 'Text Editor'
       }),
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'service-worker.js'
+      }),
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
         name: 'Text Editor App',
-        short_name: 'text-edit',
-        description: 'My awesome tetx-editor PWA App!',
+        short_name: 'JATE',
+        description: 'My awesome text-editor PWA App!',
         background_color: '#ffffff',
         theme_color: '#225ca3',
         start_url: './',
